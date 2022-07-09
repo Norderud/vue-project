@@ -23,7 +23,7 @@ export default defineComponent({
     checkInput() {
       this.progression = (this.value.length / this.inputValue.length) * 100
     },
-  },
+  }
 })
 </script>
 
@@ -44,13 +44,15 @@ export default defineComponent({
             placeholder="Start typing..."
             @input="checkInput"
           >
-            <template #progress>
-              <v-progress-linear v-model="progression" :color="color" />
-            </template>
+            <v-progress-linear
+              v-model="progression"
+              color="red"
+              :height="progression"
+              absolute
+            />
           </v-text-field>
         </div>
       </v-col>
-      <v-col cols="2" class="my-3" />
     </v-row>
   </v-container>
 </template>
