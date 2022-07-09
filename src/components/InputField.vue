@@ -8,7 +8,7 @@ export default defineComponent({
   },
   data() {
     return {
-      inputValue: this.inputText?.length,
+      inputValue: this.inputText || '',
       interval: 0,
       progression: 0,
       value: ''
@@ -16,7 +16,7 @@ export default defineComponent({
   },
   methods: {
     checkInput() {
-      this.progression = this.value.length
+      this.progression = ( this.value.length / this.inputValue.length)*100
     },
   },
   // computed: {
