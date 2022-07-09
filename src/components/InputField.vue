@@ -11,64 +11,46 @@ export default defineComponent({
       inputValue: this.inputText || '',
       interval: 0,
       progression: 0,
-      value: ''
+      value: '',
     }
+  },
+  computed: {
+    color() {
+      return ['error', 'warning', 'success'][Math.floor(this.progression / 40)]
+    },
   },
   methods: {
     checkInput() {
-      this.progression = ( this.value.length / this.inputValue.length)*100
+      this.progression = (this.value.length / this.inputValue.length) * 100
     },
   },
-  // computed: {
-  //   progress() {
-  //     return Math.min(100, this.inputText.length * 10)
-  //   },
-  //   color() {
-  //     return ['error', 'warning', 'success'][Math.floor(this.progress / 40)]
-  //   },
-  // },
 })
 </script>
 
 <template>
-  <v-container
-    class="green lighten-2"
-    fluid
-  >
+  <v-container class="green lighten-2" fluid>
     <v-row>
       <v-col cols="4">
-        <div
-          class="ma-auto"
-          style="max-width: 300px"
-        >
+        <div class="ma-auto" style="max-width: 300px">
           <v-input>{{ inputValue }}</v-input>
         </div>
       </v-col>
       <v-col cols="4">
-        <div
-          class="ma-auto"
-          style="max-width: 300px"
-        >
+        <div class="ma-auto" style="max-width: 300px">
           <v-text-field
             v-model="value"
             color="cyan darken"
             label="Text field"
             placeholder="Start typing..."
-            loading
             @input="checkInput"
           >
+            <template #progress>
+              <v-progress-linear v-model="progression" :color="color" />
+            </template>
           </v-text-field>
         </div>
       </v-col>
-      <v-col
-        cols="2"
-        class="my-3"
-      >
-        <v-progress-linear
-          v-model="progression"
-          color="black"
-        />
-      </v-col>
+      <v-col cols="2" class="my-3" />
     </v-row>
   </v-container>
 </template>
