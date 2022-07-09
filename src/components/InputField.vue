@@ -11,22 +11,14 @@ export default defineComponent({
       inputValue: this.inputText || '',
       interval: 0,
       progression: 0,
-      value: ''
+      value: '',
     }
   },
   methods: {
     checkInput() {
-      this.progression = ( this.value.length / this.inputValue.length)*100
+      this.progression = (this.value.length / this.inputValue.length) * 100
     },
-  },
-  // computed: {
-  //   progress() {
-  //     return Math.min(100, this.inputText.length * 10)
-  //   },
-  //   color() {
-  //     return ['error', 'warning', 'success'][Math.floor(this.progress / 40)]
-  //   },
-  // },
+  }
 })
 </script>
 
@@ -54,20 +46,16 @@ export default defineComponent({
             color="cyan darken"
             label="Text field"
             placeholder="Start typing..."
-            loading
             @input="checkInput"
           >
+            <v-progress-linear
+              v-model="progression"
+              color="red"
+              :height="progression"
+              absolute
+            />
           </v-text-field>
         </div>
-      </v-col>
-      <v-col
-        cols="2"
-        class="my-3"
-      >
-        <v-progress-linear
-          v-model="progression"
-          color="black"
-        />
       </v-col>
     </v-row>
   </v-container>
